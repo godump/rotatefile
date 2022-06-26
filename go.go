@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"os"
 	"time"
-
-	"github.com/godump/doa"
 )
 
 // Test whether a path exists. Returns False for broken symbolic links.
@@ -118,8 +116,7 @@ func (f *RotateFile) write(b []byte) (n int, err error) {
 
 // Panic directly to avoid errors being eaten.
 func (f *RotateFile) Write(b []byte) (n int, err error) {
-	n = doa.Try(f.write(b)).(int)
-	return n, nil
+	return f.write(b)
 }
 
 // Close closes the File.
